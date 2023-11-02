@@ -4,6 +4,3 @@ module.exports = function(api) {
     presets: ['babel-preset-expo'],
   };
 };
-module.exports = {
-  assets: ['./node_modules/react-native-vector-icons/Fonts'],
-};
