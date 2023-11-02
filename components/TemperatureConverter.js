@@ -32,17 +32,17 @@ const TemperatureConverter = () => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
+        placeholder="Fahrenheit(F)"
+        value={fahrenheit}
+        onChangeText={handleFahrenheitChange}
+        keyboardType="numeric"
+      />
+      <FontAwesome name="exchange" size={20} color="white" />
+      <TextInput
+        style={styles.input}
         placeholder="Celsius"
         value={celsius}
         onChangeText={handleCelsiusChange}
-        keyboardType="numeric"
-      />
-      <FontAwesome name="exchange" size={20} color="black" />
-      <TextInput
-        style={styles.input}
-        placeholder="Fahrenheit"
-        value={fahrenheit}
-        onChangeText={handleFahrenheitChange}
         keyboardType="numeric"
       />
     </View>
@@ -58,9 +58,12 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: 'white',
+    borderRadius: 10,
     width: 100,
     margin: 10,
-    paddingLeft: 5,
+    padding: 10,
+    backgroundColor: 'white',
+    width: '30%',
   },
 });

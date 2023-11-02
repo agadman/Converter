@@ -6,9 +6,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Text style={styles.header}>Omvandlaren</Text>
-      <Text style={styles.text}>Din bästa vän i vardagen</Text>
-      <TemperatureConverter />
+      <View style={styles.textContainer}>
+        <Text style={styles.header}>Omvandlaren</Text>
+        <Text style={styles.text}>Din bästa vän i vardagen</Text>
+      </View>
+      <View style={styles.converters}>
+        <TemperatureConverter />
+      </View>
     </View>
   );
 }
@@ -19,13 +23,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#55856b'
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     fontSize: 36,
     fontWeight: 'bold',
-
+    color: 'white',
   },
   text: {
     fontSize: 20,
+    color: 'white',
+  },
+  converters: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'top',
   }
 });
