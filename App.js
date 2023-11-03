@@ -10,7 +10,7 @@ export default function App() {
     <ImageBackground source={require("./assets/background-green.jpg")} style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.textContainer}>
-        <Text style={styles.header}>Converter</Text>
+        <Text style={styles.header}>My Converter</Text>
         <Text style={styles.text}>Your every day friend</Text>
       </View>
       <View style={styles.converters}>
