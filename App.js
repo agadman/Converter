@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 import TemperatureConverter from './components/TemperatureConverter';
 import LengthConverter from './components/InchesToMeterConverter';
 import PoundsToKgConverter from './components/PoundsToKgConverter';
@@ -7,11 +7,11 @@ import OuncesToKgConverter from './components/OuncesToKgConverter';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <ImageBackground source={require("./assets/background-green.jpg")} style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.textContainer}>
-        <Text style={styles.header}>Omvandlaren</Text>
-        <Text style={styles.text}>Din bästa vän i vardagen</Text>
+        <Text style={styles.header}>Converter</Text>
+        <Text style={styles.text}>Your every day friend</Text>
       </View>
       <View style={styles.converters}>
         <TemperatureConverter />
@@ -19,7 +19,7 @@ export default function App() {
         <PoundsToKgConverter />
         <OuncesToKgConverter />
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#55856b'
   },
   textContainer: {
     flex: 1,
