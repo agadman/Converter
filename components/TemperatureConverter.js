@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const TemperatureConverter = () => {
@@ -13,8 +13,8 @@ const TemperatureConverter = () => {
       return;
     }
     const celsiusValue = parseFloat(value);
-    const fahrenheitValue = (celsiusValue * 9/5) + 32;
-    setFahrenheit(fahrenheitValue.toFixed(2).toString());
+    const fahrenheitValue = (celsiusValue * 9 / 5) + 32;
+    setFahrenheit(fahrenheitValue.toFixed(2).toString() + ' F');
   };
 
   const handleFahrenheitChange = (value) => {
@@ -24,8 +24,12 @@ const TemperatureConverter = () => {
       return;
     }
     const fahrenheitValue = parseFloat(value);
-    const celsiusValue = (fahrenheitValue - 32) * 5/9;
-    setCelsius(celsiusValue.toFixed(2).toString());
+    const celsiusValue = (fahrenheitValue - 32) * 5 / 9;
+    setCelsius(celsiusValue.toFixed(2).toString() + ' C');
+  };
+
+  const clearInput = (setter) => {
+    setter('');
   };
 
   return (
@@ -40,14 +44,16 @@ const TemperatureConverter = () => {
             placeholder="Fahrenheit(F)"
             value={fahrenheit}
             onChangeText={handleFahrenheitChange}
+            onFocus={() => clearInput(setFahrenheit)}
             keyboardType="numeric"
           />
           <FontAwesome name="exchange" size={20} color="white" />
           <TextInput
             style={styles.input}
-            placeholder="Celsius"
+            placeholder="Celsius(C)"
             value={celsius}
             onChangeText={handleCelsiusChange}
+            onFocus={() => clearInput(setCelsius)}
             keyboardType="numeric"
           />
         </View>

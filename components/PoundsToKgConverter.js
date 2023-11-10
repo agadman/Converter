@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const PoundsToKgConverter = () => {
@@ -14,7 +14,7 @@ const PoundsToKgConverter = () => {
     }
     const kilogramsValue = parseFloat(value);
     const poundsValue = kilogramsValue * 2.20462;
-    setPounds(poundsValue.toFixed(2).toString());
+    setPounds(poundsValue.toFixed(2).toString() + ' lbs');
   };
 
   const handlePoundsChange = (value) => {
@@ -25,7 +25,11 @@ const PoundsToKgConverter = () => {
     }
     const poundsValue = parseFloat(value);
     const kilogramsValue = poundsValue / 2.20462;
-    setKilograms(kilogramsValue.toFixed(2).toString());
+    setKilograms(kilogramsValue.toFixed(2).toString() + ' kg');
+  };
+
+  const clearInput = (setter) => {
+    setter('');
   };
 
   return (
@@ -40,6 +44,7 @@ const PoundsToKgConverter = () => {
             placeholder="Pounds(lbs)"
             value={pounds}
             onChangeText={handlePoundsChange}
+            onFocus={() => clearInput(setPounds)}
             keyboardType="numeric"
           />
           <FontAwesome name="exchange" size={20} color="white" />
@@ -48,6 +53,7 @@ const PoundsToKgConverter = () => {
             placeholder="Kilograms(kg)"
             value={kilograms}
             onChangeText={handleKilogramsChange}
+            onFocus={() => clearInput(setKilograms)}
             keyboardType="numeric"
           />
         </View>

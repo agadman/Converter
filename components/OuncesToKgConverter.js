@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const OuncesToKgConverter = () => {
@@ -14,7 +14,7 @@ const OuncesToKgConverter = () => {
     }
     const kilogramsValue = parseFloat(value);
     const ouncesValue = kilogramsValue * 35.274;
-    setOunces(ouncesValue.toFixed(2).toString());
+    setOunces(ouncesValue.toFixed(2).toString() + ' oz');
   };
 
   const handleOuncesChange = (value) => {
@@ -25,7 +25,11 @@ const OuncesToKgConverter = () => {
     }
     const ouncesValue = parseFloat(value);
     const kilogramsValue = ouncesValue / 35.274;
-    setKilograms(kilogramsValue.toFixed(2).toString());
+    setKilograms(kilogramsValue.toFixed(2).toString() + ' kg');
+  };
+
+  const clearInput = (setter) => {
+    setter('');
   };
 
   return (
@@ -37,9 +41,10 @@ const OuncesToKgConverter = () => {
         <View style={styles.container}>
           <TextInput
             style={styles.input}
-            placeholder="Ounces(Oz)"
+            placeholder="Ounces(oz)"
             value={ounces}
             onChangeText={handleOuncesChange}
+            onFocus={() => clearInput(setOunces)}
             keyboardType="numeric"
           />
           <FontAwesome name="exchange" size={20} color="white" />
@@ -48,6 +53,7 @@ const OuncesToKgConverter = () => {
             placeholder="Kilograms(kg)"
             value={kilograms}
             onChangeText={handleKilogramsChange}
+            onFocus={() => clearInput(setKilograms)}
             keyboardType="numeric"
           />
         </View>

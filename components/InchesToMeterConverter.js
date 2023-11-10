@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const LengthConverter = () => {
@@ -14,7 +14,7 @@ const LengthConverter = () => {
     }
     const metersValue = parseFloat(value);
     const inchesValue = metersValue * 39.3701;
-    setInches(inchesValue.toFixed(2).toString());
+    setInches(inchesValue.toFixed(2).toString() + ' in');
   };
 
   const handleInchesChange = (value) => {
@@ -25,7 +25,11 @@ const LengthConverter = () => {
     }
     const inchesValue = parseFloat(value);
     const metersValue = inchesValue / 39.3701;
-    setMeters(metersValue.toFixed(2).toString());
+    setMeters(metersValue.toFixed(2).toString() + ' m');
+  };
+
+  const clearInput = (setter) => {
+    setter('');
   };
 
   return (
@@ -37,17 +41,19 @@ const LengthConverter = () => {
         <View style={styles.container}>
           <TextInput
             style={styles.input}
-            placeholder="Inches"
+            placeholder="Inches(in)"
             value={inches}
             onChangeText={handleInchesChange}
+            onFocus={() => clearInput(setInches)}
             keyboardType="numeric"
           />
           <FontAwesome name="exchange" size={20} color="white" />
           <TextInput
             style={styles.input}
-            placeholder="Meters"
+            placeholder="Meters(m)"
             value={meters}
             onChangeText={handleMetersChange}
+            onFocus={() => clearInput(setMeters)}
             keyboardType="numeric"
           />
         </View>
