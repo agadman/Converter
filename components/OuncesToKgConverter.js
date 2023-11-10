@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const OuncesToKgConverter = () => {
@@ -13,7 +13,7 @@ const OuncesToKgConverter = () => {
       return;
     }
     const kilogramsValue = parseFloat(value);
-    const ouncesValue = kilogramsValue * 35.274; // Conversion factor: 1 kg = 35.274 oz
+    const ouncesValue = kilogramsValue * 35.274;
     setOunces(ouncesValue.toFixed(2).toString());
   };
 
@@ -24,32 +24,37 @@ const OuncesToKgConverter = () => {
       return;
     }
     const ouncesValue = parseFloat(value);
-    const kilogramsValue = ouncesValue / 35.274; // Conversion factor: 1 oz = 0.0283495 kg
+    const kilogramsValue = ouncesValue / 35.274;
     setKilograms(kilogramsValue.toFixed(2).toString());
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Ounces(Oz)"
-        value={ounces}
-        onChangeText={handleOuncesChange}
-        keyboardType="numeric"
-      />
-      <FontAwesome name="exchange" size={20} color="white" />
-      <TextInput
-        style={styles.input}
-        placeholder="Kilograms(kg)"
-        value={kilograms}
-        onChangeText={handleKilogramsChange}
-        keyboardType="numeric"
-      />
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <ScrollView>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.input}
+            placeholder="Ounces(Oz)"
+            value={ounces}
+            onChangeText={handleOuncesChange}
+            keyboardType="numeric"
+          />
+          <FontAwesome name="exchange" size={20} color="white" />
+          <TextInput
+            style={styles.input}
+            placeholder="Kilograms(kg)"
+            value={kilograms}
+            onChangeText={handleKilogramsChange}
+            keyboardType="numeric"
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
-
-export default OuncesToKgConverter;
 
 const styles = StyleSheet.create({
   container: {
@@ -68,3 +73,5 @@ const styles = StyleSheet.create({
     width: '30%',
   },
 });
+
+export default OuncesToKgConverter;

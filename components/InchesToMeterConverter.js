@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const LengthConverter = () => {
@@ -13,7 +13,7 @@ const LengthConverter = () => {
       return;
     }
     const metersValue = parseFloat(value);
-    const inchesValue = metersValue * 39.3701; // 1 meter = 39.3701 inches
+    const inchesValue = metersValue * 39.3701;
     setInches(inchesValue.toFixed(2).toString());
   };
 
@@ -24,32 +24,37 @@ const LengthConverter = () => {
       return;
     }
     const inchesValue = parseFloat(value);
-    const metersValue = inchesValue / 39.3701; // 1 inch = 0.0254 meters
+    const metersValue = inchesValue / 39.3701;
     setMeters(metersValue.toFixed(2).toString());
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Inches"
-        value={inches}
-        onChangeText={handleInchesChange}
-        keyboardType="numeric"
-      />
-      <FontAwesome name="exchange" size={20} color="white" />
-      <TextInput
-        style={styles.input}
-        placeholder="Meters"
-        value={meters}
-        onChangeText={handleMetersChange}
-        keyboardType="numeric"
-      />
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <ScrollView>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.input}
+            placeholder="Inches"
+            value={inches}
+            onChangeText={handleInchesChange}
+            keyboardType="numeric"
+          />
+          <FontAwesome name="exchange" size={20} color="white" />
+          <TextInput
+            style={styles.input}
+            placeholder="Meters"
+            value={meters}
+            onChangeText={handleMetersChange}
+            keyboardType="numeric"
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
-
-export default LengthConverter;
 
 const styles = StyleSheet.create({
   container: {
@@ -68,3 +73,5 @@ const styles = StyleSheet.create({
     width: '30%',
   },
 });
+
+export default LengthConverter;

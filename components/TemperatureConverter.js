@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const TemperatureConverter = () => {
@@ -29,26 +29,32 @@ const TemperatureConverter = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Fahrenheit(F)"
-        value={fahrenheit}
-        onChangeText={handleFahrenheitChange}
-        keyboardType="numeric"
-      />
-      <FontAwesome name="exchange" size={20} color="white" />
-      <TextInput
-        style={styles.input}
-        placeholder="Celsius"
-        value={celsius}
-        onChangeText={handleCelsiusChange}
-        keyboardType="numeric"
-      />
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
+      <ScrollView>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.input}
+            placeholder="Fahrenheit(F)"
+            value={fahrenheit}
+            onChangeText={handleFahrenheitChange}
+            keyboardType="numeric"
+          />
+          <FontAwesome name="exchange" size={20} color="white" />
+          <TextInput
+            style={styles.input}
+            placeholder="Celsius"
+            value={celsius}
+            onChangeText={handleCelsiusChange}
+            keyboardType="numeric"
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
-export default TemperatureConverter;
 
 const styles = StyleSheet.create({
   container: {
@@ -67,3 +73,5 @@ const styles = StyleSheet.create({
     width: '30%',
   },
 });
+
+export default TemperatureConverter;
