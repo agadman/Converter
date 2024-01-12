@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ClearButton from './ClearButton';
 
 const LengthConverter = () => {
   const [meters, setMeters] = useState('');
@@ -28,8 +29,9 @@ const LengthConverter = () => {
     setMeters(metersValue.toFixed(2).toString() + ' m');
   };
 
-  const clearInput = (setter) => {
-    setter('');
+  const clearInput = () => {
+    setInches('');
+    setMeters('');
   };
 
   return (
@@ -56,6 +58,7 @@ const LengthConverter = () => {
             onFocus={() => clearInput(setMeters)}
             keyboardType="numeric"
           />
+          <ClearButton clearInput={clearInput} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

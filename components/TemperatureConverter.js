@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ClearButton from './ClearButton';
 
 const TemperatureConverter = () => {
   const [celsius, setCelsius] = useState('');
@@ -28,8 +29,9 @@ const TemperatureConverter = () => {
     setCelsius(celsiusValue.toFixed(2).toString() + ' C');
   };
 
-  const clearInput = (setter) => {
-    setter('');
+  const clearInput = () => {
+    setCelsius('');
+    setFahrenheit('');
   };
 
   return (
@@ -56,6 +58,7 @@ const TemperatureConverter = () => {
             onFocus={() => clearInput(setCelsius)}
             keyboardType="numeric"
           />
+          <ClearButton clearInput={clearInput} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ClearButton from './ClearButton';
 
 const OuncesToKgConverter = () => {
   const [kilograms, setKilograms] = useState('');
@@ -28,8 +29,9 @@ const OuncesToKgConverter = () => {
     setKilograms(kilogramsValue.toFixed(2).toString() + ' kg');
   };
 
-  const clearInput = (setter) => {
-    setter('');
+  const clearInput = () => {
+    setOunces('');
+    setKilograms('');
   };
 
   return (
@@ -56,6 +58,7 @@ const OuncesToKgConverter = () => {
             onFocus={() => clearInput(setKilograms)}
             keyboardType="numeric"
           />
+          <ClearButton clearInput={clearInput} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
