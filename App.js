@@ -1,5 +1,6 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import TemperatureConverter from './components/TemperatureConverter';
 import LengthConverter from './components/InchesToMeterConverter';
 import PoundsToKgConverter from './components/PoundsToKgConverter';
@@ -7,19 +8,23 @@ import OuncesToKgConverter from './components/OuncesToKgConverter';
 
 export default function App() {
   return (
-    <ImageBackground source={require("./assets/background-green.jpg")} style={styles.container}>
-      <StatusBar style="auto" />
-      <View style={styles.textContainer}>
-        <Text style={styles.header}>Converter</Text>
-        <Text style={styles.text}>Your every day friend</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <ImageBackground source={require("./assets/background-green.jpg")} style={styles.backgroundImage}>
+          <StatusBar style="auto" />
+          <View style={styles.textContainer}>
+            <Text style={styles.header}>Converter</Text>
+            <Text style={styles.text}>Your every day friend</Text>
+          </View>
+          <View style={styles.converters}>
+            <TemperatureConverter />
+            <LengthConverter />
+            <PoundsToKgConverter />
+            <OuncesToKgConverter />
+          </View>
+        </ImageBackground>
       </View>
-      <View style={styles.converters}>
-        <TemperatureConverter />
-        <LengthConverter />
-        <PoundsToKgConverter />
-        <OuncesToKgConverter />
-      </View>
-    </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -27,6 +32,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  backgroundImage: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -47,6 +55,6 @@ const styles = StyleSheet.create({
   converters: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'top',
+    justifyContent: 'flex-start',
   }
 });
